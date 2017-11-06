@@ -9,6 +9,10 @@
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juliuscebreros/ssm-config.git"
+  },
   "author": "Julius Cebreros",
   "license": "ISC",
   "devDependencies": {
