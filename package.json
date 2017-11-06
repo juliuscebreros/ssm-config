@@ -1,0 +1,23 @@
+{
+  "name": "ssm-config",
+  "version": "1.0.0",
+  "description": "Reads a config object assumes all caps are ssm",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha test/"
+  },
+  "author": "Julius Cebreros",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "should": "^13.1.3",
+    "sinon": "^4.1.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.145.0",
+    "co": "^4.6.0"
+  }
+}
