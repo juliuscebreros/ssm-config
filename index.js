@@ -4,10 +4,19 @@ const co = require( 'co' );
 
 function* inflate( obj, region ) {
     const inflatedObject = {};
+
+    if ( Array.isArray( obj ) ) {
+        arrayResult = [];
+        for( item of obj ) {
+            arrayResult.push( ( yield inflate( item, region ) ) );
+        }
+        return arrayResult;
+    }
+
     for( key in obj ) {
         const val = obj[ key ];
         if ( typeof val === 'object' ) {
-            inflatedObject[ key ] = yield inflate( val );
+            inflatedObject[ key ] = yield inflate( val, region );
             continue;
         } else {
             if ( key === key.toUpperCase() && 

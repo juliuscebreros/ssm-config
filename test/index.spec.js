@@ -48,6 +48,25 @@ describe( 'SSM-Config Main Test', () => {
         } );
     } );
 
+    it( '- Should replace keys inside arrays', () => {
+        fixture = {
+            x: [{
+                KEYA: 'testa',
+                KEYB: 'testb'
+            }, {
+                KEYC: 'testc',
+                KEYD: 'testd'
+            }]
+        };
+
+        return ssmConfig( fixture ).then((res) => {
+            res.x[ 0 ].should.eql({
+                keya: 'replacedtesta',
+                keyb: 'replacedtestb'
+            });
+        } );
+    } );
+
     it( '- Should return a failed promise if call to ssm failed', () => {
         ssmStub.restore();
         ssmStub = sinon.stub( aws, 'getSSMValue' ).callsFake( () => {
