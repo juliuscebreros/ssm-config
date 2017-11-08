@@ -2,7 +2,7 @@
 const aws = require( './aws-wrapper' );
 const co = require( 'co' );
 
-function* inflate( obj ) {
+function* inflate( obj, region ) {
     const inflatedObject = {};
     for( key in obj ) {
         const val = obj[ key ];
@@ -12,7 +12,7 @@ function* inflate( obj ) {
         } else {
             if ( key === key.toUpperCase() && 
                    typeof val === 'string' ) {
-                inflatedObject[ key.toLowerCase() ] = yield aws.getSSMValue( val );
+                inflatedObject[ key.toLowerCase() ] = yield aws.getSSMValue( val, region );
                 continue;
             }
         }
@@ -23,9 +23,9 @@ function* inflate( obj ) {
     return inflatedObject;
 }
 
-module.exports = ( configObj ) => {
+module.exports = ( configObj, region = process.env.AWS_REGION ) => {
     return co( function* execute() {
-        return yield inflate( configObj );
+        return yield inflate( configObj, region );
     } ).catch( ( err ) => {
         throw new Error(`SSM Config Error: ${err.message}` );
     } );
