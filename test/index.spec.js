@@ -52,7 +52,13 @@ describe( 'SSM-Config Main Test', () => {
         fixture = {
             x: [{
                 KEYA: 'testa',
-                KEYB: 'testb'
+                KEYB: 'testb',
+                moreNest: [
+                    {
+                        url: 'xxx',
+                        NAME: 'testa'
+                    }
+                ]
             }, {
                 KEYC: 'testc',
                 KEYD: 'testd'
@@ -60,10 +66,8 @@ describe( 'SSM-Config Main Test', () => {
         };
 
         return ssmConfig( fixture ).then((res) => {
-            res.x[ 0 ].should.eql({
-                keya: 'replacedtesta',
-                keyb: 'replacedtestb'
-            });
+            res.x[ 0 ].keya.should.equal( `replaced${fixture.x[0].KEYA}` );
+            res.x[ 0 ].moreNest[ 0 ].name.should.equal( `replaced${fixture.x[0].moreNest[0].NAME}` );
         } );
     } );
 

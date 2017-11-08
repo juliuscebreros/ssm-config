@@ -6,7 +6,7 @@ function* inflate( obj, region ) {
     const inflatedObject = {};
 
     if ( Array.isArray( obj ) ) {
-        arrayResult = [];
+        const arrayResult = [];
         for( item of obj ) {
             arrayResult.push( ( yield inflate( item, region ) ) );
         }
