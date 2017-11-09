@@ -17,7 +17,7 @@ function* inflate( obj, region ) {
         const val = obj[ key ];
         if ( typeof val === 'object' ) {
             inflatedObject[ key ] = yield inflate( val, region );
-            continue;
+            continue
         } else {
             if ( key === key.toUpperCase() && 
                    typeof val === 'string' ) {
@@ -32,7 +32,7 @@ function* inflate( obj, region ) {
     return inflatedObject;
 }
 
-module.exports = ( configObj, region = process.env.AWS_REGION ) => {
+module.exports = ( configObj, region ) => {
     return co( function* execute() {
         return yield inflate( configObj, region );
     } ).catch( ( err ) => {
