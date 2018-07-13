@@ -1,6 +1,6 @@
 {
   "name": "ssm-config",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Reads a config object assumes all caps are ssm",
   "main": "index.js",
   "directories": {
