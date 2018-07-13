@@ -7,17 +7,17 @@ function* inflate( obj, region ) {
 
     if ( Array.isArray( obj ) ) {
         const arrayResult = [];
-        for( item of obj ) {
+        for( let item of obj ) {
             arrayResult.push( ( yield inflate( item, region ) ) );
         }
         return arrayResult;
     }
 
-    for( key in obj ) {
+    for( let key in obj ) {
         const val = obj[ key ];
         if ( typeof val === 'object' ) {
             inflatedObject[ key ] = yield inflate( val, region );
-            continue
+            continue;
         } else {
             if ( key === key.toUpperCase() && 
                    typeof val === 'string' ) {
