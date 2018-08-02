@@ -81,4 +81,19 @@ describe( 'SSM-Config Main Test', () => {
             result.message.should.startWith( 'SSM Config Error' );
         } );
     } );
+
+    it( '- Should return the values inside an array', () => {
+        fixture = {
+            "s3Bucket": "r2-qa-ics-licensing-report",
+            "email": {
+                "sender": "ICS.Shipments@invenco.com",
+                "recipients": [ "john.duneas@invenco.com", "asecondperson@invenco.com" ]
+            }
+        };
+
+        return ssmConfig( fixture ).then( ( res ) => {
+            res.email.recipients[ 0 ].should.equal( fixture.email.recipients[ 0 ] );
+            res.email.recipients[ 1 ].should.equal( fixture.email.recipients[ 1 ] );
+        } )
+    } );
 } );

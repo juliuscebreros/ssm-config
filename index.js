@@ -13,6 +13,10 @@ function* inflate( obj, region ) {
         return arrayResult;
     }
 
+    if ( typeof obj === 'string' ) {
+        return obj;
+    }
+
     for( let key in obj ) {
         const val = obj[ key ];
         if ( typeof val === 'object' ) {
